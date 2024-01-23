@@ -38,6 +38,8 @@ header {
 }
 
 .hour {
+    display: flex;
+    align-items: center;
     background-color: #ffffff;
     color: #000000;
     border-top: 1px dashed #000000;
@@ -69,4 +71,11 @@ header {
 .saveBtn i:hover {
     font-size: 20px;
     transition: all 0.3s ease-in-out;
+}
+
+.hour,
+.saveBtn {
+    max-width: 100px;
+    width: 100%;
+    height: 100%;
 }
