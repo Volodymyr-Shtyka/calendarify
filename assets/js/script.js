@@ -2,12 +2,13 @@ $(document).ready(function () {
     // Display the current day in the header
     $("#currentDay").text(dayjs().format("dddd, MMMM D"));
 
+    var timeStart = 9;
+    var timeEnd = 17;
+
     // Dynamically generate timeblocks for the workday
     function generateTimeblocks() {
         var timeblocksList = $(".timeblocks-list");
         var currentTime = dayjs().hour();
-        var timeStart = 9;
-        var timeEnd = 17;
 
         for (var hour = timeStart; hour <= timeEnd; hour++) {
             // Create a new time block element
@@ -51,4 +52,17 @@ $(document).ready(function () {
         // Save event in local storage with a unique key
         localStorage.setItem(`event-${hour}`, eventText);
     });
+
+    // Load events from local storage
+    function loadEvents() {
+        for (var hour = timeStart; hour <= timeEnd; hour++) {
+            var event = localStorage.getItem(`event-${hour}`);
+            if (event) {
+                $(`#description-${hour}`).val(event);
+            }
+        }
+    }
+
+    // Load events when the page is loaded/refreshes
+    loadEvents();
 })
