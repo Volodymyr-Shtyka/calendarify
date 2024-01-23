@@ -16,7 +16,7 @@ $(document).ready(function () {
             // Create elements for hour, textarea, and save button
             var hourDiv = $("<div>").addClass("col hour").text(formatTime(hour));
             var textArea = $("<textarea>").addClass("col description").attr("id", `description-${hour}`);
-            var saveBtn = $("<button>").addClass("col saveBtn").html('<i class="fas fa-save"></i>');
+            var saveBtn = $("<button>").addClass("col saveBtn").attr('hour', hour).html('<i class="fas fa-save"></i>');
 
             // Append elements to the time block
             timeblock.append(hourDiv, textArea, saveBtn);
@@ -42,4 +42,13 @@ $(document).ready(function () {
 
     // Initialize the page with generated time blocks
     generateTimeblocks();
+
+    // Event listener to store events in local storage
+    $(".saveBtn").on("click", function () {
+        var hour = $(this).attr('hour');
+        var eventText = $(`#description-${hour}`).val();
+
+        // Save event in local storage with a unique key
+        localStorage.setItem(`event-${hour}`, eventText);
+    });
 })
