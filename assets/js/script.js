@@ -13,7 +13,7 @@ $(document).ready(function () {
             var timeblock = $("<div>").addClass("row align-content-center time-block past");
 
             // Create elements for hour, textarea, and save button
-            var hourDiv = $("<div>").addClass("col hour").text(hour);
+            var hourDiv = $("<div>").addClass("col hour").text(formatTime(hour));
             var textArea = $("<textarea>").addClass("col description").attr("id", `description-${hour}`);
             var saveBtn = $("<button>").addClass("col saveBtn").html('<i class="fas fa-save"></i>');
 
@@ -23,6 +23,11 @@ $(document).ready(function () {
             // Append the time block to the container
             timeblocksList.append(timeblock);
         }
+    }
+
+    // Format the time to display as AM/PM
+    function formatTime(hour) {
+        return hour > 12 ? `${hour - 12}:00 PM` : `${hour}:00 AM`;
     }
 
     // Initialize the page with generated time blocks
